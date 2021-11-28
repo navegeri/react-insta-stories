@@ -133,6 +133,7 @@ export default function () {
                 playState={pause}
                 story={stories[currentId]}
                 getVideoDuration={getVideoDuration}
+                // Add props to send to story for more control
             />
             {!preventDefault && <div style={styles.overlay}>
               <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
