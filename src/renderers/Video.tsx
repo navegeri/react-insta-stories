@@ -4,7 +4,7 @@ import { Renderer, Tester } from './../interfaces';
 import WithHeader from './wrappers/withHeader';
 import WithSeeMore from './wrappers/withSeeMore';
 
-export const renderer: Renderer = ({ story, action, isPaused, config, messageHandler }) => {
+export const renderer: Renderer = ({ story, action, isPaused, isMuted, config, messageHandler }) => {
     const [loaded, setLoaded] = React.useState(false);
     const [muted, setMuted] = React.useState(false);
     const { width, height, loader, storyStyles } = config;
@@ -25,6 +25,12 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
             }
         }
     }, [isPaused]);
+
+    React.useEffect(() => {
+        if (vid.current) {
+            vid.current.muted = isMuted
+        }
+    }, [isMuted]);
 
     const onWaiting = () => {
         action("pause", true);
@@ -59,7 +65,7 @@ export const renderer: Renderer = ({ story, action, isPaused, config, messageHan
                     playsInline
                     onWaiting={onWaiting}
                     onPlaying={onPlaying}
-                    muted={muted}
+                    muted={muted && isMuted}
                     autoPlay
                     webkit-playsinline="true"
                 />

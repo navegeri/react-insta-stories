@@ -5,10 +5,15 @@ import ProgressContext from './../context/Progress'
 import Story from './Story'
 import ProgressArray from './ProgressArray'
 import { GlobalCtx, StoriesContext as StoriesContextInterface } from './../interfaces'
+import UnmutedSVG from './../assets/unmuted.svg';
+import MutedSVG from './../assets/muted.svg';
+
+
 
 export default function () {
     const [currentId, setCurrentId] = useState<number>(0)
     const [pause, setPause] = useState<boolean>(true)
+    const [muted, setMuted] = useState<boolean>(true)
     const [bufferAction, setBufferAction] = useState<boolean>(true)
     const [videoDuration, setVideoDuration] = useState<number>(0)
 
@@ -112,6 +117,15 @@ export default function () {
         }
     }
 
+    const toggleMute = (e: React.MouseEvent | React.TouchEvent) => {
+        e.preventDefault()
+        if (muted) {
+            setMuted(false)
+        } else {
+            setMuted(true)
+        }
+    }
+
     const getVideoDuration = (duration: number) => {
         setVideoDuration(duration * 1000)
     }
@@ -131,13 +145,17 @@ export default function () {
                 action={toggleState}
                 bufferAction={bufferAction}
                 playState={pause}
+                muteState={muted}
                 story={stories[currentId]}
                 getVideoDuration={getVideoDuration}
-                // Add props to send to story for more control
+            // Add props to send to story for more control
             />
             {!preventDefault && <div style={styles.overlay}>
-              <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
-              <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('next')} onMouseDown={debouncePause} onMouseUp={mouseUp('next')} />
+                <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('previous')} onMouseDown={debouncePause} onMouseUp={mouseUp('previous')} />
+                <div style={{ width: '50%', zIndex: 999 }} onTouchStart={debouncePause} onTouchEnd={mouseUp('next')} onMouseDown={debouncePause} onMouseUp={mouseUp('next')} />
+                {stories[currentId].type === "video" &&
+                    <div style={styles.volume} onClick={toggleMute}>{muted ? <MutedSVG height="3em" width="3em"/>: <UnmutedSVG height="3em" width="3em"/>}</div>
+                }
             </div>}
         </div>
     )
@@ -155,5 +173,18 @@ const styles = {
         height: 'inherit',
         width: 'inherit',
         display: 'flex'
+    },
+    volume: {
+        zIndex: 999,
+        position: "absolute",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        width: "6em",
+        height: "6em",
+        borderRadius: "50%",
+        bottom: 50,
+        right: 50,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     }
 }

@@ -33,6 +33,7 @@ export interface GlobalCtx {
     loop?: boolean;
     defaultInterval?: number;
     isPaused?: boolean;
+    isMuted?: boolean;
     currentIndex?: number;
     renderers?: {
         renderer: Renderer;
@@ -62,6 +63,7 @@ export type Action = (action: string, bufferAction?: boolean) => void;
 export interface Renderer extends React.FC<{
     action: Action;
     isPaused: boolean;
+    isMuted: boolean;
     story: Story;
     config: {
         width?: NumberOrString;
@@ -84,6 +86,7 @@ export interface StoryProps {
     story: Story;
     action: Action;
     playState: boolean;
+    muteState: boolean;
     getVideoDuration: Function;
     bufferAction: boolean;
 }

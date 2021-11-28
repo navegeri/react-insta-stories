@@ -25,6 +25,7 @@ const Story = (props: StoryProps) => {
 		return <InnerContent
 			action={props.action}
 			isPaused={props.playState}
+            isMuted={props.muteState}
 			story={props.story}
 			config={config}
 			messageHandler={rendererMessageHandler}
