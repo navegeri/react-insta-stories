@@ -1,5 +1,5 @@
 {
-	"name": "react-insta-stories",
+	"name": "navegeri-react-insta-stories",
 	"version": "2.3.0",
 	"description": "A React component for Instagram like stories",
 	"main": "dist/index.js",
