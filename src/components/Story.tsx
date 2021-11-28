@@ -20,6 +20,7 @@ const Story = (props: StoryProps) => {
 	const getStoryContent = () => {
 		let InnerContent = props.story.content;
         let url = props.story.url;
+        let type = props.story.type;
 		let config = { width, height, loader, header, storyStyles };
 		return <InnerContent
 			action={props.action}

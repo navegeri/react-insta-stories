@@ -72,6 +72,7 @@ export interface Renderer extends React.FC<{
     };
     messageHandler: (type: string, data: any) => ({ ack: 'OK' | 'ERROR' })
     url: string;
+    type: string;
 }> { }
 
 export type Tester = (story: Story) => {
