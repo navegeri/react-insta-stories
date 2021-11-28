@@ -1,3 +1,12 @@
+## Install
+npm run build
+git add .
+git commit
+git push
+npm publish
+
+
+
 ![Main image](https://i.imgur.com/OAL12S5.jpg)
 
 <h1 style="margin: 0" align="center">react-insta-stories</h1>
