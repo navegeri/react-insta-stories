@@ -68,6 +68,7 @@ export interface Renderer extends React.FC<{
         ack: 'OK' | 'ERROR';
     });
     url: string;
+    type: string;
 }> {
 }
 export declare type Tester = (story: Story) => {

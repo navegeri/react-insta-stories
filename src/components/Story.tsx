@@ -29,6 +29,7 @@ const Story = (props: StoryProps) => {
 			config={config}
 			messageHandler={rendererMessageHandler}
             url={url}
+            type={type}
 		/>
 	};
 
